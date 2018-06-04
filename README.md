@@ -11,6 +11,7 @@ A package which adds base foundation for Laravel projects. The package is inspir
 
 For more information about Foundation check out https://github.com/lucid-architecture/laravel and https://tech.vinelab.com/the-lucid-architecture-concept-ad8e9ed0258f.
 
+Base Laravel 5.6 scaffolding on this package can be checked out at [https://github.com/anfischer/laravel-foundation-scaffold](https://github.com/anfischer/laravel-foundation-scaffold). 
 ## Structure
 
 ```
