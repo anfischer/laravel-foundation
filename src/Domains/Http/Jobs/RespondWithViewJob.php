@@ -3,7 +3,8 @@
 namespace Anfischer\Foundation\Domains\Http\Jobs;
 
 use Anfischer\Foundation\Job\Job;
-use Illuminate\Routing\ResponseFactory;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Response;
 
 class RespondWithViewJob extends Job
 {
@@ -20,7 +21,7 @@ class RespondWithViewJob extends Job
         $this->headers = $headers;
     }
 
-    public function handle(ResponseFactory $factory)
+    public function handle(ResponseFactory $factory) : Response
     {
         return $factory->view($this->template, $this->data, $this->status, $this->headers);
     }

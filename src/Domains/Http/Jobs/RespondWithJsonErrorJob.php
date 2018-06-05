@@ -3,7 +3,8 @@
 namespace Anfischer\Foundation\Domains\Http\Jobs;
 
 use Anfischer\Foundation\Job\Job;
-use Illuminate\Routing\ResponseFactory;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\JsonResponse;
 
 class RespondWithJsonErrorJob extends Job
 {
@@ -32,7 +33,7 @@ class RespondWithJsonErrorJob extends Job
         $this->options = $options;
     }
 
-    public function handle(ResponseFactory $response)
+    public function handle(ResponseFactory $response) : JsonResponse
     {
         return $response->json($this->content, $this->status, $this->headers, $this->options);
     }
