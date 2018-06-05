@@ -1,6 +1,6 @@
 <?php
 
-namespace Anfischer\Foundation\Job;
+namespace Anfischer\Foundation\Operation;
 
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
