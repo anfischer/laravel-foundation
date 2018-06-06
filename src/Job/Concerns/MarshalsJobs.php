@@ -35,9 +35,9 @@ trait MarshalsJobs
             $reflection = new ReflectionClass($command);
             $constructorParameters = (new Optional($reflection->getConstructor()))->getParameters();
 
-            $injected = (new Collection($constructorParameters))->map(function ($parameter) use ($command, $params) {
+            $injected = array_map(function ($parameter) use ($command, $params) {
                 return $this->mapParameterValueForCommand($command, $params, $parameter);
-            })->toArray();
+            }, $constructorParameters ?? []);
 
             return $reflection->newInstanceArgs($injected);
         } catch (\ReflectionException $e) {

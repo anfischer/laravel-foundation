@@ -3,12 +3,15 @@
 namespace Anfischer\Foundation\Tests\Unit;
 
 use Anfischer\Foundation\Job\Concerns\MarshalsJobs;
+use Anfischer\Foundation\Job\Job;
 use Anfischer\Foundation\Tests\Stubs\DummyJob;
 use Anfischer\Foundation\Tests\Stubs\DummyJobWithDefaultValues;
 use Anfischer\Foundation\Tests\Stubs\DummyJobWithNoArguments;
 use Anfischer\Foundation\Tests\Stubs\DummyJobWithNoConstructor;
 use Anfischer\Foundation\Tests\Stubs\DummyJobWithTypeHints;
 use Anfischer\Foundation\Tests\Stubs\TypeHintedClass;
+use Anfischer\Foundation\Tests\Stubs\TypeHintedClassWithArrayableInterface;
+use Illuminate\Database\Eloquent\Model;
 use Orchestra\Testbench\TestCase;
 use RuntimeException;
 
@@ -109,8 +112,9 @@ class MarshalsJobsTest extends TestCase
 
         $this->assertInstanceOf(DummyJobWithTypeHints::class, $dummyJob);
         $this->assertInstanceOf(TypeHintedClass::class, $dummyJob->typeHintedProperty);
+        $this->assertInstanceOf(TypeHintedClassWithArrayableInterface::class, $dummyJob->typeHintedArrayableProperty);
     }
-    
+
     /** @test */
     public function an_exception_is_thrown_if_parameters_which_can_not_be_reflected_correctly_are_present()
     {
@@ -132,5 +136,19 @@ class MarshalsJobsTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Unable to reflect on class NonExistingJob. Are you sure it exists and is available for autoload?');
         $this->marshal->marshalWrapper('NonExistingJob', collect(['nonExistingProperty' => 'withSomeValue']));
+    }
+}
+
+class WhatEver extends Model
+{
+}
+
+class Gg extends Job
+{
+    public $typeHintedProperty;
+
+    public function __construct(WhatEver $typeHintedProperty)
+    {
+        $this->typeHintedProperty = $typeHintedProperty;
     }
 }
