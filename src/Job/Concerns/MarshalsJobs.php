@@ -7,6 +7,7 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Optional;
 use ReflectionClass;
+use ReflectionException;
 use ReflectionParameter;
 use RuntimeException;
 
@@ -16,12 +17,12 @@ trait MarshalsJobs
      * Marshal a command from the given array accessible object.
      *
      * @param string $command
-     * @param \ArrayAccess $source
+     * @param ArrayAccess|null $source
      * @param array $extras
      *
      * @return mixed
      *
-     * @throws \Exception
+     * @throws RuntimeException
      */
     protected function marshal($command, ArrayAccess $source = null, array $extras = [])
     {
@@ -40,7 +41,7 @@ trait MarshalsJobs
             }, $constructorParameters ?? []);
 
             return $reflection->newInstanceArgs($injected);
-        } catch (\ReflectionException $e) {
+        } catch (ReflectionException $e) {
             throw new RuntimeException(
                 "Unable to reflect on class {$command}. Are you sure it exists and is available for autoload?"
             );
