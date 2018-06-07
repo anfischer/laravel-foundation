@@ -33,7 +33,7 @@ trait DispatchesJobs
      *
      * @return mixed
      */
-    public function runInQueue($job, $arguments = [], array $extra = [], $queue = 'default')
+    public function runInQueue($job, $arguments = [], array $extra = [], string $queue = 'default')
     {
         $job = $this->prepare($job, $arguments, $extra);
         $job->onQueue($queue);
