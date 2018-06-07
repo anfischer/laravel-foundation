@@ -47,10 +47,10 @@ trait DispatchesJobs
      *
      * @param $job
      * @param $arguments
-     * @param $extra
+     * @param array $extra
      * @return mixed
      */
-    private function prepare($job, $arguments, $extra) : Job
+    private function prepare($job, $arguments, array $extra) : Job
     {
         if ($arguments instanceof Request) {
             return $this->marshal($job, $arguments, $extra);
