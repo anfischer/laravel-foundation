@@ -23,7 +23,10 @@ class DispatchesJobsTest extends TestCase
 
         $jobDispatcher = Mockery::mock(JobDispatcher::class)->makePartial();
         $jobDispatcher->shouldReceive('marshal')->once()
-            ->withArgs([DummyJob::class, Mockery::type(Collection::class), $arguments])->andReturn(new class extends Job {
+            ->withArgs([DummyJob::class, Mockery::on(function ($closure) use ($arguments) {
+                return $closure instanceof Collection && $closure->toArray() === $arguments;
+            }), []])
+            ->andReturn(new class extends Job {
             });
         $jobDispatcher->shouldReceive('dispatch')->once()->withArgs([Mockery::type(Job::class)]);
 

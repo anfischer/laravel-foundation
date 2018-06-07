@@ -57,7 +57,7 @@ trait DispatchesJobs
         }
 
         if (! \is_object($job)) {
-            return $this->marshal($job, new Collection, $arguments);
+            return $this->marshal($job, new Collection($arguments), $extra);
         }
 
         return $job;
