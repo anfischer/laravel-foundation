@@ -70,7 +70,7 @@ trait MarshalsJobs
         }
 
         if ($parameter->hasType() && ! $parameter->getType()->isBuiltin()) {
-            return (new Container)->getInstance()->make($parameter->getClass()->getName());
+            return Container::getInstance()->make($parameter->getClass()->getName());
         }
 
         throw new RuntimeException("Unable to map parameter [{$parameter->name}] to command [{$command}]");
