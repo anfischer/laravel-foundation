@@ -14,7 +14,7 @@ abstract class RouteServiceProvider extends BaseServiceProvider
      */
     abstract public function map(Router $router);
 
-    public function loadRoutesFile($router, $namespace, $path) : void
+    public function loadRoutesFile(Router $router, $namespace, $path) : void
     {
         $router->group(['namespace' => $namespace], function ($router) use ($path) {
             if (file_exists($path)) {
