@@ -8,7 +8,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as BaseServiceP
 abstract class RouteServiceProvider extends BaseServiceProvider
 {
     /**
-     * Read the routes from the "routes.php" file of this Service
+     * Abstract function to set Service controller namespace and load routes
      *
      * @param \Illuminate\Routing\Router $router
      */

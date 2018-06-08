@@ -12,9 +12,9 @@ trait DispatchesJobs
      * Beautifier function to be called instead of the
      * laravel function dispatch.
      *
-     * @param mixed                          $job
+     * @param string|object $job
      * @param array|\Illuminate\Http\Request $arguments
-     * @param array                          $extra
+     * @param array $extra
      *
      * @return mixed
      */
@@ -26,7 +26,7 @@ trait DispatchesJobs
     /**
      * Runs the job in the given queue.
      *
-     * @param string $job
+     * @param string|object $job
      * @param array|\Illuminate\Http\Request $arguments
      * @param array $extra
      * @param string $queue
@@ -45,10 +45,11 @@ trait DispatchesJobs
     /**
      * Prepare a job by marshalling it if needed.
      *
-     * @param $job
-     * @param $arguments
+     * @param string|Job $job
+     * @param array|\Illuminate\Http\Request $arguments
      * @param array $extra
-     * @return mixed
+     *
+     * @return Job
      */
     private function prepare($job, $arguments, array $extra) : Job
     {

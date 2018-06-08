@@ -16,11 +16,11 @@ trait MarshalsJobs
     /**
      * Marshal a command from the given array accessible object.
      *
-     * @param string $command
+     * @param string|object $command
      * @param ArrayAccess|null $source
      * @param array $extras
      *
-     * @return mixed
+     * @return object
      *
      * @throws RuntimeException
      */
